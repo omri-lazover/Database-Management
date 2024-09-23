@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<a href="/"> Home </a>
+<br><br>
+<a href="Query_results"> Query Results </a>
+<br><br>
+<a href="Records_Management"> Records Management </a>
+
+
+<FORM method="post" action="Rankings">
+    {% csrf_token %}
+    hID:
+    <select name="hID" required>
+        {% for family in hIDs %}
+            <option name="hID" value="{{ family.hID }}">{{ family.hID }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    Title:
+    <select name="Title" width="50" required>
+        {% for program in titles %}
+            <option value="{{ program.title }}">{{ program.title }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    Grade: <select name="grade" size="1" required>
+    <option selected>5</option>
+    <option >4</option>
+    <option >3</option>
+    <option >2</option>
+    <option >1</option>
+</select> <br>
+
+    <button type="submit" name = "addGrade">submit</button>
+</FORM>
+
+<br>
+
+<FORM method="post" action="Rankings">
+    {% csrf_token %}
+    min rank: <input type="number" name="minRank" required> <br>
+    Genre: <select name="Genre" size="1" required>
+    {% for content in sql_res1 %}
+    <option>{{ content.genre }}</option>
+    {% endfor %}
+
+</select> <br>
+
+    <button type="submit" name="form2">submit</button>
+</FORM>
+<br>
+
+<table border="1" width="40%" align="center">
+    {% csrf_token %}
+    <th>Title</th>
+    <th>Average Rank</th>
+    {% for result in min_ranks_sql %}
+        <tr>
+            <td>{{ result.title }}</td>
+            <td>{{ result.Average_Rank }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+body{
+    background-color: aqua;
+    text-align: center;
+}
+h1{
+    text-align: center;
+}
+
+table{
+    background-color: chartreuse;
+    align: center;
+}
+
+th{
+    background-color: darkgoldenrod;
+}
+h2{
+    color: crimson;
+}

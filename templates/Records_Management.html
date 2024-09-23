@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<h1><u>Record Management</u></h1>
+
+<a href="/"> Home </a>
+<br><br>
+<a href="Query_results"> Query Results </a>
+<br><br>
+<a href="Rankings"> Rankings </a>
+
+<br><br>
+
+<h2>Order</h2>
+<FORM method="post" action="Records_Management">
+    {% csrf_token %}
+    hID <input type="number" name="hID" required> <br>
+    title: <input type="text" name="Title" required> <br>
+
+    <button type="submit">submit</button>
+</FORM>
+
+
+{% if exeption1 %}
+   <h2>Family ID Not in DB </h2>
+{% endif %}
+{% if exeption2 %}
+   <h2>Program Not in DB</h2>
+{% endif %}
+{% if exeption3 %}
+   <h2> Your Family Has Already 3 Programs</h2>
+{% endif %}
+{% if exeption4 %}
+   <h2>The Program Not Avalible</h2>
+{% endif %}
+{% if exeption5 %}
+   <h2>You Have the Program</h2>
+{% endif %}
+{% if exeption6 %}
+   <h2>Family Had This Program In The Past</h2>
+{% endif %}
+{% if exeption7 %}
+   <h2>Adults Only Program Sorry</h2>
+{% endif %}
+{% if NoProblem %}
+   <h2>ITS WORKED</h2>
+{% endif %}
+
+
+<h2>Return</h2>
+<FORM method="post" action="Record_Return">
+    {% csrf_token %}
+    hID <input type="number" name="hID" required> <br>
+    title: <input type="text" name="Title" required> <br>
+
+    <button type="submit">submit</button>
+</FORM>
+
+{% if exeption8 %}
+   <h2>Family ID Not in DB </h2>
+{% endif %}
+{% if exeption9 %}
+   <h2>Program Not in DB</h2>
+{% endif %}
+{% if exeption10 %}
+   <h2>The Program Not Ordered by You</h2>
+{% endif %}
+{% if exeption11 %}
+   <h2>The Order Has Been Return</h2>
+{% endif %}
+
+
+<table border="1" width="15%" align="center">
+    <th>hID</th>
+    <th>Total Orders</th>
+        {% for content in sql_res %}
+            <tr>
+            <td>{{ content.hid }} </td>
+            <td>{{ content.TotalOrders }} </td>
+            </tr>
+        {% endfor %}
+    </table><br>
+
+</body>
+</html>
